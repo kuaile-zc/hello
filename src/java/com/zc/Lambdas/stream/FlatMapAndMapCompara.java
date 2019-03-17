@@ -14,10 +14,6 @@ import java.util.stream.IntStream;
  */
 public class FlatMapAndMapCompara {
 
-    public static void main(String[] args) {
-            Demo();
-    }
-
 
     /**
      * Use (1,2,3) and (3,4)
@@ -29,7 +25,7 @@ public class FlatMapAndMapCompara {
      * {2,3},{2,4}
      * {3,3},{3,4}
      */
-    private static void Demo(){
+    public static void Demo(){
         List<Integer> number1 = Arrays.asList(1,2,3);
         List<Integer> number2 = Arrays.asList(3,4);
         List<int[]> pairs= number1.stream()
