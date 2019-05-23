@@ -1,6 +1,7 @@
 package com.zc.Lambdas.stream.parallel;
 
 import java.util.function.Function;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
@@ -11,9 +12,13 @@ import java.util.stream.Stream;
  */
 public class NumberStream {
     public static void main(String[] args) {
-        System.out.println("Squential sim done in:"+measureSumPerf(NumberStream::sequentialSum,5000000L));
-        System.out.println("iterate sim done in:"+measureSumPerf(NumberStream::iterativeSum,5000000L));
-        System.out.println(" Parallel sim done in:"+measureSumPerf(NumberStream::parallelSum,5000000L));
+
+        long time = 40000000L;
+        System.out.println("Squential sim done in:"+measureSumPerf(NumberStream::sequentialSum,time));
+        System.out.println("iterate sim done in:"+measureSumPerf(NumberStream::iterativeSum,time));
+        System.out.println("Parallel sim done in:"+measureSumPerf(NumberStream::parallelSum,time));
+        System.out.println("range done in:"+measureSumPerf(NumberStream::rangedSum,time));
+        System.out.println("Parallel range done in:"+measureSumPerf(NumberStream::parallelRangedSum,time));
 
     }
 
@@ -36,6 +41,17 @@ public class NumberStream {
             result  +=i;
         }
         return result;
+    }
+
+    public static long rangedSum(long n){
+        return LongStream.range(1,n)
+                .reduce(0L,Long::sum);
+    }
+
+    public static long parallelRangedSum(long n){
+        return LongStream.range(1,n)
+                .parallel()
+                .reduce(0L,Long::sum);
     }
 
     public static long measureSumPerf(Function<Long,Long> adder,long n){
