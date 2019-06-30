@@ -17,6 +17,7 @@ repositories {
 dependencies {
 
     compile 'org.apache.commons:commons-lang3:jar:3.8.1'
+    compile 'org.mozilla.intl:chardet:1.0'
 //    compile group: 'junit', name: 'junit', version: '4.12'
 
 
