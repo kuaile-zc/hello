@@ -1,0 +1,15 @@
+/null
+/nullwebapps
+/bin/
+/build
+/fileBased*
+/deployment
+out/
+.*
+bingSampleResponse.xml
+googleSampleResponse.xml
+functional-tests/build/
+!.gitignore
+*.iml
+*.ipr
+*.iws
