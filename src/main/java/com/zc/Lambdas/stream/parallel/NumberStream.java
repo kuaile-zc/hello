@@ -5,7 +5,6 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
- * 描述:
  *
  * @author zc
  * @create 2019-04-16 21:23

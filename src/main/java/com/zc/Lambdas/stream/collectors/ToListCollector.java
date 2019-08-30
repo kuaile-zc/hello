@@ -11,7 +11,6 @@ import static java.util.stream.Collector.Characteristics.CONCURRENT;
 import static java.util.stream.Collector.Characteristics.IDENTITY_FINISH;
 
 /**
- * 描述:
  *
  * @author zc
  * @create 2019-04-10 20:56

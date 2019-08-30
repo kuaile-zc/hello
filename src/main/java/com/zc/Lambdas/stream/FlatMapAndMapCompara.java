@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * 描述:
  *
  * @author zc
  * @create 2019-03-17 12:15

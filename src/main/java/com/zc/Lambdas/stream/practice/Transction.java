@@ -1,7 +1,6 @@
 package com.zc.Lambdas.stream.practice;
 
 /**
- * 描述:
  *
  * @author zc
  * @create 2019-03-18 20:29

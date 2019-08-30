@@ -1,7 +1,6 @@
 package com.zc.Lambdas.stream;
 
 /**
- * 描述:
  *
  * @author zc
  * @create 2019-03-14 20:57
