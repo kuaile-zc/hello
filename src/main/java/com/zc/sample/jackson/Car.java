@@ -4,6 +4,15 @@ import java.math.BigDecimal;
 
 public class Car {
 
+    public Car() {
+    }
+
+    public Car(String name, BigDecimal price, Double speed) {
+        this.name = name;
+        this.price = price;
+        this.speed = speed;
+    }
+
     private String name;
 
     private BigDecimal price;
