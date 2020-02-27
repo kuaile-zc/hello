@@ -33,6 +33,18 @@ public class Hello {
         System.out.println(set.contains(b));
         System.out.println(set.contains(c));
 
+        String str = "select convert(varchar, rt.SKUGroupCatalogItemID) + '_' +convert(varchar, cirt.TableKeyID) + '='  + "
+                + "isnull(( select  convert(varchar, cirp.TableKeyID) + ',' from [dbo].RatePLan rp "
+                + "join [dbo].CatalogItem cirp on cirp.CatalogItemId = rp.RatePlanCatalogItemID "
+                + "where rp.RoomTypeCatalogItemID = rt.RoomTypeCatalogItemID for xml path('')), ',') as String "
+                + "from [dbo].RoomType rt with(nolock) join [dbo].CatalogItem cirt with(nolock) "
+                + "on cirt.CatalogItemId = rt.RoomTypeCatalogItemID "
+                + "join [dbo].CatalogItem cisku with(nolock) on cisku.CatalogItemId = rt.SKUGroupCatalogItemID "
+                + "where cisku.CatalogItemStatusTypeID = 1 and cirt.CatalogItemStatusTypeID = 1 "
+                + "order by rt.SKUGroupCatalogItemID";
+
+        System.out.println(str);
+
     }
 }
 

@@ -6,7 +6,7 @@ apply plugin: 'idea'
 
 //Sets the location of the Java source file, default src/main/java
 sourceSets {
-//    main.java.srcDirs += 'src'
+//    main.java.srcDirs += 'src/main'
 //    test.java.srcDirs += 'test'
 }
 
@@ -38,6 +38,8 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jacksonVersion
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
 
+    compile group: 'com.codahale.metrics', name: 'metrics-jvm', version: '3.0.2'
+
     //Juest company need
 //    compile ('expedia:com.expedia.e3.shopsvc.shared.thirdparty.lcs:3.0.0'){
 //        exclude group: 'expedia'
@@ -45,4 +47,9 @@ dependencies {
 
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.testng:testng:6.8.+'
+}
+
+test {
+    useTestNG()
 }
