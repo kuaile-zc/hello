@@ -31,6 +31,11 @@ ext{
 dependencies {
 
     compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'org.projectlombok:lombok:1.18.10'
+
+    //slf4j
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
     compile group: 'junit', name: 'junit', version: '4.12'
 
     //Jackson
@@ -39,6 +44,7 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: jacksonVersion
 
     compile group: 'com.codahale.metrics', name: 'metrics-jvm', version: '3.0.2'
+
 
     //Juest company need
 //    compile ('expedia:com.expedia.e3.shopsvc.shared.thirdparty.lcs:3.0.0'){
