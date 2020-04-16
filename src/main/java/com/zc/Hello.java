@@ -1,6 +1,9 @@
 package com.zc;
 
 import com.zc.sample.jackson.Car;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,6 +48,13 @@ public class Hello {
 
         System.out.println(str);
 
+
+    }
+
+    @Test
+    public void test(){
+        Logger logger = LoggerFactory.getLogger(Object.class);
+        logger.info("123");
     }
 }
 
