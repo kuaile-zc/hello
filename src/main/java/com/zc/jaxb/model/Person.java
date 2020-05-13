@@ -22,6 +22,7 @@ import java.util.Set;
 @XmlRootElement
 @Getter
 @Setter
+@ToString
 public class Person {
 
 
@@ -67,14 +68,4 @@ public class Person {
     }
 
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", addr='" + addr + '\'' +
-                ", area='" + area + '\'' +
-                '}';
-    }
 }
