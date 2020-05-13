@@ -1,15 +1,13 @@
 package com.zc;
 
-import com.zc.sample.jackson.Car;
+import com.zc.lambdas.demo.model.IntObject;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.lang.management.ManagementFactory;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -48,6 +46,9 @@ public class Hello {
 
         System.out.println(str);
 
+        System.out.println(1 << 4);
+
+
 
     }
 
@@ -55,6 +56,8 @@ public class Hello {
     public void test(){
         Logger logger = LoggerFactory.getLogger(Object.class);
         logger.info("123");
+        String str = ManagementFactory.getRuntimeMXBean().getName().split("@")[1].replace('.', '_');
+        System.out.println(str);
     }
 }
 
