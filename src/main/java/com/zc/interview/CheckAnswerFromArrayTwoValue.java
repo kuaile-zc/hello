@@ -3,7 +3,7 @@ package com.zc.interview;
 import java.util.Arrays;
 
 /**
- * Description:
+ * Description:找到数组中间随机两个数的和
  *
  * @author Corey Zhang
  * @create 2020-05-13 9:55

@@ -15,5 +15,7 @@ public class DoubleTest {
         double b = 0.5+0.1;
         System.out.println(a);
         System.out.println(b);
+
     }
+
 }
