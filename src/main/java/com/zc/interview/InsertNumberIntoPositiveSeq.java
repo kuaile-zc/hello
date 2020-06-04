@@ -3,7 +3,7 @@ package com.zc.interview;
 import java.util.Arrays;
 
 /**
- * Description:
+ * Description: 正序数组随机插入一个数
  *
  * @author Corey Zhang
  * @create 2020-05-13 13:56
@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class InsertNumberIntoPositiveSeq {
     public static void main(String[] args) {
         int[] arrays = {3,7,12,25,55,67,77,80,100,120,665,991,1000};
-        int insertNumber = 999;
+        int insertNumber = 1001;
         Arrays.stream(dichotomyFunction(arrays, insertNumber)).forEach(System.out::println);
     }
 
@@ -21,9 +21,9 @@ public class InsertNumberIntoPositiveSeq {
         int leftIndex = 0;
         int halfIndex = (rightIndex+leftIndex)/2;
         while (true){
-            if ( halfIndex==0 || halfIndex== arrays.length ||  (arrays[halfIndex-1] <= insertNumber && arrays[halfIndex] >= insertNumber) ){
+            if ( halfIndex==0 || halfIndex== arrays.length ||   ( insertNumber >= arrays[halfIndex-1]   &&  insertNumber <= arrays[halfIndex]  ) ){
                 return insertArray(arrays, insertNumber, halfIndex);
-            }else if (arrays[halfIndex-1] > insertNumber){
+            }else if ( insertNumber < arrays[halfIndex-1]  ){
                 rightIndex = halfIndex;
                 halfIndex = halfIndex/2;
             }else {

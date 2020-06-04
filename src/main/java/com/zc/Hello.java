@@ -54,10 +54,24 @@ public class Hello {
 
     @Test
     public void test(){
-        Logger logger = LoggerFactory.getLogger(Object.class);
-        logger.info("123");
-        String str = ManagementFactory.getRuntimeMXBean().getName().split("@")[1].replace('.', '_');
-        System.out.println(str);
+//        Logger logger = LoggerFactory.getLogger(Object.class);
+//        logger.info("123");
+//        String str = ManagementFactory.getRuntimeMXBean().getName().split("@")[1].replace('.', '_');
+//        System.out.println(str);
+//        Integer a = 129;
+//        Integer b = 129;
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        for (String str1 : list) {
+            if ("1".equals(str1)) {
+                list.remove(str1);
+            }
+        }
+        System.out.println(list);
+        System.out.println(4 >>> 1);
+        System.out.println(00001 ^ 0001);
+
     }
 }
 

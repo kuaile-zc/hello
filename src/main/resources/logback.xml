@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration>
+
+    <Property name="path" value="."/>
     <!-- Send debug messages to System.out -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- By default, encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
@@ -9,31 +11,34 @@
         </encoder>
     </appender>
 
+
     <!-- Send debug messages to a file -->
-    <appender name="FILE"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>D:/logs/java_toolbox_lbk.log</file>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}/logs/hello.txt</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>%d{yyyy-MM-dd_HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <FileNamePattern>D:/logs/java_toolbox_lbk.%i.log.zip</FileNamePattern>
+            <FileNamePattern>${path}/logs/hello-%d{yyyy-MM-dd}.%i.txt</FileNamePattern>
             <MinIndex>1</MinIndex>
             <MaxIndex>10</MaxIndex>
+            <maxFileSize>50MB</maxFileSize>
+            <maxHistory>5</maxHistory>
         </rollingPolicy>
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
             <MaxFileSize>2MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
 
-    <logger name="com.weibo.keeplooking.logging" level="INFO" additivity="false">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
-    </logger>
+    <!--<logger name="ch.qos.logback" level="INFO" additivity="false">-->
+        <!--<appender-ref ref="STDOUT" />-->
+        <!--<appender-ref ref="FILE" />-->
+    <!--</logger>-->
 
     <!-- By default, the level of the root level is set to DEBUG -->
     <root level="DEBUG">
         <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
     </root>
 
 </configuration>
