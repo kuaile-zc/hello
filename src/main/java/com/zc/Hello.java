@@ -72,6 +72,13 @@ public class Hello {
         System.out.println(4 >>> 1);
         System.out.println(00001 ^ 0001);
 
+        Map<String, String> map =new  HashMap<String, String>(16);
+        for (int i = 0; i < 20; i++){
+            map.put("abc"+String.valueOf(i), "value"+String.valueOf(i));
+        }
+
+        System.out.println(map);
+
     }
 }
 
