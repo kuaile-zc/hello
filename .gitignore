@@ -13,3 +13,5 @@ functional-tests/build/
 *.iml
 *.ipr
 *.iws
+
+/logs/
