@@ -1,4 +1,4 @@
-package com.zc;
+package com.zc.leet;
 
 import java.util.HashMap;
 import java.util.HashSet;

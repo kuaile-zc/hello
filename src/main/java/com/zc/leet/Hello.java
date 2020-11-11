@@ -1,4 +1,4 @@
-package com.zc;
+package com.zc.leet;
 
 
 import com.zc.lambdas.demo.model.IntObject;

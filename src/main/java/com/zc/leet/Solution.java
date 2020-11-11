@@ -1,4 +1,4 @@
-package com.zc;
+package com.zc.leet;
 
 /**
  * 此类用于演示动态规划案例 LeetCode.62
