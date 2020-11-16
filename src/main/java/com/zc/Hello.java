@@ -45,30 +45,39 @@ public class Hello {
         System.out.println(1 << 4);
 
 
+        System.out.println(longestMountain(new int[]{0, 1, 2, 3, 4, 5, 3, 2, 1, 0}));
+
+//        wordBreak("catsanddog",null);
+
+
+        int[] arry = new int[]{7,10,5,1,8,3,16,6};
+        int[] ret = new int[8];
+        merge_sort_recursive(arry, ret, 0, 7);
+
 
     }
 
-    @Test
-    public void test(){
+//    @Test
+//    public void test(){
 //        Logger logger = LoggerFactory.getLogger(Object.class);
 //        logger.info("123");
 //        String str = ManagementFactory.getRuntimeMXBean().getName().split("@")[1].replace('.', '_');
 //        System.out.println(str);
 //        Integer a = 129;
 //        Integer b = 129;
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        for (String str1 : list) {
-            if ("1".equals(str1)) {
-                list.remove(str1);
-            }
-        }
-        System.out.println(list);
-        System.out.println(4 >>> 1);
-        System.out.println(00001 ^ 0001);
-
-    }
+//        List<String> list = new ArrayList<>();
+//        list.add("1");
+//        list.add("2");
+//        for (String str1 : list) {
+//            if ("1".equals(str1)) {
+//                list.remove(str1);
+//            }
+//        }
+//        System.out.println(list);
+//        System.out.println(4 >>> 1);
+//        System.out.println(00001 ^ 0001);
+//
+//    }
 
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -221,6 +230,229 @@ public class Hello {
 
         return ret[m-1][n-1];
     }
+
+
+    //青蛙是否能过河  [2,3,1,1,4].
+    public boolean canJump(int[] nums) {
+//        //初始化结果数组
+//        boolean[] ret = new boolean[nums.length];
+//
+//        //初始化第一个数值
+//        ret[0] = true;
+//        //遍历数组
+//        for (int i = 1; i < nums.length; i++){
+//            //设置初始值
+//            ret[i] = false;
+//            //遍历i之前的数组
+//            for (int j = i-1; j >= 0; j--){
+//                if (ret[j] && j + nums[j] >= i){
+//                    ret[i] = true;
+//                    break;
+//                }
+//            }
+//        }
+//
+//        return ret[nums.length - 1];
+
+        int length = nums.length;
+        int maxPath = 0;
+        for (int i = 0; i < length; i++){
+            if (maxPath >= i){
+                maxPath = Math.max(maxPath, i + nums[i]);
+            }
+
+            if (maxPath >= length-1){
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
+
+    //视频拼接
+    public int videoStitching(int[][] clips, int T) {
+        //初始化最大位置数组
+        int[] maxClip = new int[T];
+        //使用贪心算法 先计算出每个位置的最大位置
+        for (int[] clip : clips){
+            if (clip[0] < T){
+                maxClip[clip[0]] = Math.max(clip[1], maxClip[clip[0]]);
+            }
+        }
+
+
+        //设置快始指针
+        int fast = 0;
+        //设置慢指针
+        int slow = 0;
+        //设置结果数
+        int count = 0;
+        for (int i = 0; i < T; i++){
+            fast = Math.max(fast, maxClip[i]);
+
+            //如果i追上fast表示已经断开
+            if (i == fast){
+                return -1;
+            }
+
+            //如果i追上slow表示添加一个片段
+            if (i == slow){
+                count++;
+                slow = fast;
+            }
+        }
+
+
+        return count;
+    }
+
+
+
+    //山峰问题
+    public static int longestMountain(int[] A) {
+        int length = A.length;
+        if (length < 3){
+            return 0;
+        }
+        //初始化当前位置的最大值
+        int maxCount = 0;
+
+        //初始化左右指针和长度
+        int left = 0;
+        int right = 0;
+
+        //遍历数组A
+        for (int i=0; i < length; i++){
+            int count = 0;
+            left = i;
+            right = i;
+            while (left - 1 >= 0 && A[left - 1] < A[left]){
+                left = left - 1;
+            }
+
+            while (right + 1 < length && A[right] > A[right + 1]){
+                right = right + 1;
+            }
+
+            if (right == i || left == i || right - left +1 < 3){
+                count = 0;
+            }else {
+                count = right - left +1;
+                maxCount = Math.max(maxCount, count);
+            }
+        }
+
+
+        return maxCount;
+    }
+
+
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        //储存结果集
+        int[] ret = new int[nums.length];
+
+        for (int i = 0; i < nums.length; i++){
+            int count = 0;
+            for (int j = 0; j < nums.length; j++){
+                if (nums[i] > nums[j]){
+                    count++;
+                }
+            }
+            ret[i] = count;
+        }
+
+        return ret;
+    }
+
+    //单词拆分 II
+    public static List<String> wordBreak(String s, List<String> wordDict) {
+        //分配两个结题所需空间，第一个单词的前后坐标
+        List<IndexAndStr> firstWordLastIndex = new ArrayList<>();
+        List<IndexAndStr> indexAndStrList = new ArrayList<>();
+        List<String> ret = new ArrayList<>();
+
+        for (String dict : wordDict){
+            //计算这个单词在句子中的前后坐标
+            int first = s.indexOf(dict);
+            if (-1 != first && 0 != first){
+                IndexAndStr indexAndStr = new IndexAndStr();
+                indexAndStr.firstIndex = first;
+                indexAndStr.lastIndex = first + dict.length();
+                indexAndStr.str = dict;
+                indexAndStrList.add(indexAndStr);
+            }else if (first == 0){
+                IndexAndStr indexAndStr = new IndexAndStr();
+                indexAndStr.firstIndex = first;
+                indexAndStr.lastIndex = first + dict.length();
+                indexAndStr.str = dict;
+                firstWordLastIndex.add(indexAndStr);
+            }
+        }
+
+        //遍历所有可能性
+
+        return null;
+    }
+
+    static class IndexAndStr{
+        public int firstIndex;
+        public int lastIndex;
+        public String str;
+    }
+
+    //归并排序
+    public static int countRangeSum(int[] nums, int lower, int upper) {
+        int ret = 0;
+        //遍历第一次
+        for (int i = 0; i < nums.length; i++){
+
+            //拿到起始位置往下遍历
+            for (int j = i; j < nums.length; j++){
+                long numCount = 0;
+                int index = i;
+                while (index <= j){
+                    numCount = numCount + nums[index];
+                    index++;
+                }
+                //判断是否符合条件
+                if (numCount >= lower && numCount<= upper){
+                    ret++;
+                }
+            }
+        }
+
+        return ret;
+    }
+
+
+
+    static void merge_sort_recursive(int[] arr, int[] result, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int len = end - start, mid = (len >> 1) + start;
+        int start1 = start, end1 = mid;
+        int start2 = mid + 1, end2 = end;
+        merge_sort_recursive(arr, result, start1, end1);
+        merge_sort_recursive(arr, result, start2, end2);
+        int k = start;
+        while (start1 <= end1 && start2 <= end2) {
+            result[k++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
+        }
+        while (start1 <= end1) {
+            result[k++] = arr[start1++];
+        }
+        while (start2 <= end2) {
+            result[k++] = arr[start2++];
+        }
+        for (k = start; k <= end; k++) {
+            arr[k] = result[k];
+        }
+    }
+
 }
 
 
