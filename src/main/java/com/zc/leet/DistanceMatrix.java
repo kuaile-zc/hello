@@ -1,6 +1,8 @@
 package com.zc.leet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 1030. 距离顺序排列矩阵单元格
@@ -50,6 +52,7 @@ import java.util.Arrays;
  */
 public class DistanceMatrix {
 
+    //数组排序法
     public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
         //创建结果集
         int[][] ret = new int[R*C][2];
@@ -66,5 +69,40 @@ public class DistanceMatrix {
 
         Arrays.sort(ret, (o1,o2) -> (Math.abs(o1[0]-r0)+Math.abs(o1[1]-c0))  -  (Math.abs(o2[0]-r0)+Math.abs(o2[1]-c0))) ;
         return ret;
+    }
+
+    //桶排序法
+    public int[][] allCellsDistOrder2(int R, int C, int r0, int c0) {
+        //获取最大值
+        int max = Math.max(r0, R-r0-1) + Math.max(c0, C-c0-1);
+        int min = 0;
+        List<List<int[]>> bucket = new ArrayList<>();
+
+        for (int i=0; i<=max; i++){
+            bucket.add(new ArrayList<>());
+        }
+
+        //填充完桶
+        for (int i=0; i<R; i++){
+            for (int j=0; j<C; j++){
+                int value = Math.abs(r0-i)+Math.abs(c0-j);
+                bucket.get(value).add(new int[]{i,j});
+            }
+        }
+
+        int index = 0;
+        int[][] ret = new int[R*C][2];
+        for (int i=0; i<=max; i++){
+            for (int[] array: bucket.get(i)){
+                ret[index++] = array;
+            }
+        }
+
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        DistanceMatrix distanceMatrix = new DistanceMatrix();
+        distanceMatrix.allCellsDistOrder2(2,2,0,1);
     }
 }
