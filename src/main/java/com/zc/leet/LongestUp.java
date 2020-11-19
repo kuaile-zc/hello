@@ -54,9 +54,37 @@ public class LongestUp {
         return maxValue;
     }
 
+    //贪心算法
+    public int lengthOfLIS2(int[] nums) {
+        int length = nums.length;
+        //记录结果集和最小点结果
+        if (length == 0) {
+            return 0;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        list.add(nums[0]);
+        for (int i=1; i<length; i++){
+            int value = nums[i];
+            if (value > list.get(list.size()-1)){
+                list.add(value);
+            }else {
+                for (int j=0; j<list.size(); j++){
+                    if (list.get(j)>=value){
+                        list.set(j, value);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return list.size();
+
+    }
+
     public static void main(String[] args) {
         LongestUp longestUp = new LongestUp();
-        System.out.println(longestUp.lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));
+        System.out.println(longestUp.lengthOfLIS2(new int[]{10,9,2,5,3,7,101,18}));
         System.out.println();
     }
 }
