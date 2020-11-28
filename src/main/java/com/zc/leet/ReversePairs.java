@@ -31,7 +31,7 @@ import java.util.Map;
  * @modified
  */
 public class ReversePairs {
-    //暴力 将两倍的最大值存起来
+    //暴力 将两倍的最大值存起来 超时
     public int reversePairs(int[] nums) {
         int length = nums.length;
         if (length < 2){
@@ -57,8 +57,69 @@ public class ReversePairs {
         return ret[length-1];
     }
 
+    //归并排序
+    public int reversePairs2(int[] nums) {
+        if (nums.length<2){
+            return 0;
+        }
+        return reversePairsRecursive(nums, 0, nums.length-1);
+    }
+
+    private int reversePairsRecursive(int[] nums, int left, int right){
+        if (left == right){
+            return 0;
+        }
+
+        int middle = (left + right)/2;
+        int leftValue = reversePairsRecursive(nums, left, middle);
+        int rightValue = reversePairsRecursive(nums, middle+1, right);
+
+        int ret = leftValue + rightValue;
+        int leftIndex = left;
+        int rightIndex = middle+1;
+
+        //计算两个数组之间的翻转对
+        while (leftIndex <= middle){
+            while (rightIndex <= right && (long)nums[leftIndex] > (long)2*nums[rightIndex]){
+                rightIndex++;
+            }
+            ret += rightIndex - (middle+1);
+            leftIndex++;
+        }
+
+        //归并数组
+        int leftSortIndex = left;
+        int rightSortIndex = middle+1;
+        int[] temp = new int[right - left +1];
+        int index = 0;
+        while (leftSortIndex<=middle && rightSortIndex<=right){
+            if (nums[leftSortIndex]<nums[rightSortIndex]){
+                temp[index++] = nums[leftSortIndex++];
+            }else {
+                temp[index++] = nums[rightSortIndex++];
+            }
+        }
+        //清空左边或者右边的数组
+        while (leftSortIndex<=middle){
+            temp[index++] = nums[leftSortIndex++];
+        }
+        while (rightSortIndex<=right){
+            temp[index++] = nums[rightSortIndex++];
+        }
+
+
+        index = 0;
+        for (int i=0; i<temp.length; i++){
+            nums[left++] = temp[index++];
+        }
+
+
+        return ret;
+
+    }
+
     public static void main(String[] args) {
         ReversePairs reversePairs = new ReversePairs();
-        reversePairs.reversePairs(new int[]{2147483647,2147483647,2147483647,2147483647,2147483647,2147483647});
+        reversePairs.reversePairs2(new int[]{1,3,2,3,1});
     }
 }
