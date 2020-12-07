@@ -57,8 +57,10 @@ public class CountPries {
 
 
     public static void main(String[] args) {
-        CountPries countPries = new CountPries();
-        countPries.countPrimes2(10);
+//        CountPries countPries = new CountPries();
+//        countPries.countPrimes2(10);
+        double a = -0.11;
+        System.out.println((int)a);
     }
 
     private static boolean isPries(int input){
@@ -95,4 +97,5 @@ public class CountPries {
         }
         return ret;
     }
+
 }
