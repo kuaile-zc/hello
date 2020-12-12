@@ -79,16 +79,26 @@ public class FlippingMatrix {
         }
     }
 
-    private void flipLine(int[][]A, int line){
-        int length = A.length;
-        for (int i=0; i<length; i++){
-            if (A[i][line]==1){
-                A[i][line]=0;
-            }else {
-                A[i][line]=1;
+    //官方答案
+    public int matrixScore2(int[][] A) {
+        int m = A.length, n = A[0].length;
+        int ret = m * (1 << (n - 1));
+
+        for (int j = 1; j < n; j++) {
+            int nOnes = 0;
+            for (int i = 0; i < m; i++) {
+                if (A[i][0] == 1) {
+                    nOnes += A[i][j];
+                } else {
+                    nOnes += (1 - A[i][j]); // 如果这一行进行了行反转，则该元素的实际取值为 1 - A[i][j]
+                }
             }
+            int k = Math.max(nOnes, m - nOnes);
+            ret += k * (1 << (n - j - 1));
         }
+        return ret;
     }
+
 
     public static void main(String[] args) {
         FlippingMatrix flippingMatrix = new FlippingMatrix();
