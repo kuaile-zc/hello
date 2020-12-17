@@ -51,4 +51,35 @@ public class BestTimeBuyStockWithFree {
 
         return dp[length-1][1];
     }
+
+
+
+    /**
+     * 动态规划 压缩
+     * dp[i][0]表示i天不持有股票可获得最大的利润 = max {前一天不持有股票的最大利润， 前一天持有股票然后今天卖掉  }
+     * dp[i][1]表示i天持有股票可获得最大的利润  = max  {前一天持有股票的最大利润， 前一天不持有股票然后今天买股票  }
+     * @param prices
+     * @param fee
+     * @return
+     */
+    public int maxProfit2(int[] prices, int fee) {
+        int length = prices.length;
+        int[] dp = new int[2];
+        dp[0] = 0;
+        dp[1] = -prices[0];
+
+        for (int i=1; i<length; i++){
+            int temp = dp[0];
+            dp[0] = Math.max(temp, dp[1]+prices[i]-2);
+            dp[1] = Math.max(dp[1], temp-prices[i]);
+        }
+
+        return dp[0];
+
+    }
+
+    public static void main(String[] args) {
+        BestTimeBuyStockWithFree bestTimeBuyStockWithFree = new BestTimeBuyStockWithFree();
+        bestTimeBuyStockWithFree.maxProfit2(new int[]{1,2,7,5,10,3}, 3);
+    }
 }
