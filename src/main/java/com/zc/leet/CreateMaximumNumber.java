@@ -49,96 +49,20 @@ import java.util.List;
  */
 public class CreateMaximumNumber {
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
-        if (k==0){
-            return new int[0];
-        }
-        long max = 0;
-        int k1 = 0;
-        int k2 = k;
-
-        for (int i=0; i<k; i++){
-            if (k1<=nums1.length && k2<=nums2.length){
-                max = Math.max(max, getNumber(nums1, nums2, k1, k2));
-            }
-            k1++;
-            k2--;
-        }
-
-        int[] ret = new int[k];
-        for (int i=k-1; i>=0; i--){
-            int value = (int) max%10;
-            max = max/10;
-            ret[i] = value;
-        }
-
-        return ret;
-
+        return null;
     }
 
-    private long getNumber(int[] nums1, int[] nums2, int k1, int k2){
-        List<Integer> list1 = returnMaxArray(nums1, k1);
-        List<Integer> list2 = returnMaxArray(nums2, k2);
+    public String removeKdigits(String num, int k) {
+        int length = num.length();
+        if (length==0){
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<length && k>0; i++){
 
-        return merge(list1, list2);
-    }
-
-    private List<Integer> returnMaxArray(int[] nums, int k){
-//        if (k==0){
-//            return new ArrayList<>();
-//        }
-//        List<Integer> list = new ArrayList<>(nums.length);
-//        for (int i=0; i<nums.length; i++){
-//            list.add(nums[i]);
-//        }
-//
-//        for (int i=1; i<list.size() && list.size()>k;){
-//            if (list.get(i-1)<list.get(i)){
-//                list.remove(i-1);
-//            }else {
-//                i++;
-//            }
-//        }
-//
-//        if (list.size()>k){
-//            while (list.size()!=k){
-//                list.remove(k);
-//            }
-//        }
-//
-//        return list;
-       return null;
-
-
-    }
-
-    private long merge(List<Integer> list1, List<Integer> list2){
-        List<Integer> retList = new ArrayList<>(list1.size()+list2.size());
-        int index1 = 0;
-        int index2 = 0;
-
-        while (index1<= list1.size()-1 && index2<= list2.size()-1){
-            if (list1.get(index1) >= list2.get(index2)){
-                retList.add(list1.get(index1++));
-            }else {
-                retList.add(list2.get(index2++));
-            }
         }
 
-        while (index1<= list1.size()-1){
-            retList.add(list1.get(index1++));
-        }
-        while (index2<= list2.size()-1){
-            retList.add(list2.get(index2++));
-        }
-
-        long ret = 0;
-        long retSite = 1;
-        for (int i=retList.size()-1; i>=0; i--){
-            ret += retSite*retList.get(i);
-            retSite *=10;
-        }
-
-        return ret;
+        return null;
     }
 
     public static void main(String[] args) {
