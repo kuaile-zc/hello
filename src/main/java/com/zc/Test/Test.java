@@ -36,5 +36,8 @@ public class Test {
         for (TimeData timeData:list){
             System.out.println(timeData);
         }
+
+        List<Integer> list1 = new ArrayList<>();
+
     }
 }
