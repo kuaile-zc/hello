@@ -36,5 +36,13 @@ public class Test {
         for (TimeData timeData:list){
             System.out.println(timeData);
         }
+
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        queue.add(1);
+        queue.add(1,2);
+        queue.listIterator();
+
     }
 }
