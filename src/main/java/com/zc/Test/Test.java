@@ -38,6 +38,11 @@ public class Test {
         }
 
         List<Integer> list1 = new ArrayList<>();
+        List<Integer> queue = new LinkedList<>();
+        queue.add(1);
+        queue.add(1);
+        queue.add(1,2);
+        queue.listIterator();
 
     }
 }

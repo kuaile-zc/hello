@@ -1,6 +1,7 @@
 package com.zc.designMode.decorator;
 
 /**
+ * 装饰者模式案例
  * @author CoreyChen Zhang
  * @version 2020/12/25 15:04
  * @modified
