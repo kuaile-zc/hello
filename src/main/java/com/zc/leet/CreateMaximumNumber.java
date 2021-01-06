@@ -52,18 +52,6 @@ public class CreateMaximumNumber {
         return null;
     }
 
-    public String removeKdigits(String num, int k) {
-        int length = num.length();
-        if (length==0){
-            return "0";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i=0; i<length && k>0; i++){
-
-        }
-
-        return null;
-    }
 
     public static void main(String[] args) {
         CreateMaximumNumber createMaximumNumber = new CreateMaximumNumber();
