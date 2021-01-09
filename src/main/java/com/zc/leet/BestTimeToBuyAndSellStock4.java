@@ -38,24 +38,54 @@ package com.zc.leet;
  * @version 2020/12/28 16:46
  * @modified
  */
-public class MaxProfit4 {
+public class BestTimeToBuyAndSellStock4 {
 
+    /**
+     * 确定dp数组以及下标的含义
+     *
+     * 使用二维数组 dp[i][j] ：第i天的状态为j，所剩下的最大现金是dp[i][j]
+     *
+     * j的状态表示为：
+     *
+     *     0 表示不操作
+     *     1 第一次买入
+     *     2 第一次卖出
+     *     3 第一次买入
+     *     4 第一次卖出
+     *     .....
+     *
+     * 大家应该发现规律了吧 ，除了0以外，偶数就是卖出，奇数就是买入。
+     *
+     * 题目要求是至多有K笔交易，那么j的范围就定义为 2 * k + 1 就可以了。
+     *
+     */
+    //动态规划
     public int maxProfit(int k, int[] prices) {
-//        int length = prices.length;
-//        if (k==0 || length==0){
-//            return 0;
-//        }
-//        //三个参数分别是 第几天 交易次数 买入/卖出的利润
-//        int[][][] dp = new int[length][k][2];
-//        //初始化
-//        dp[0][0][0] = 0;
-//        dp[0][0][1] = -prices[0];
-//
-//        for (int i = 1; i < length; i++) {
-//            for (int j = 1; j <= k; j++) {
-//                dp[i][j][1] = Math.max(dp[i-1][j-1][1], dp[i-1][j-1][0] - prices[i]);
-//            }
-//        }
-        return 0;
+        int length = prices.length;
+        if (k==0 || length==0){
+            return 0;
+        }
+
+        k = Math.min(k, length/2);
+        int[][] dp = new int[length][2*k+1];
+        //初始化
+        for (int i = 1; i < 2*k+1; i+=2) {
+            dp[0][i] = -prices[0];
+
+        }
+        for (int i = 1; i < length; i++) {
+            for (int j = 1; j < 2 * k + 1; j+=2) {
+                dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j-1] - prices[i]);
+                dp[i][j+1] = Math.max(dp[i-1][j+1], dp[i-1][j] + prices[i]);
+            }
+        }
+
+        return dp[length-1][2*k];
+    }
+
+
+    public static void main(String[] args) {
+        BestTimeToBuyAndSellStock4 bestTimeToBuyAndSellStock4 = new BestTimeToBuyAndSellStock4();
+        bestTimeToBuyAndSellStock4.maxProfit(2, new int[]{3,2,6,5,0,3});
     }
 }
