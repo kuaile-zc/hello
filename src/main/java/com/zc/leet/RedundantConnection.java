@@ -52,25 +52,48 @@ public class RedundantConnection {
     public int[] findRedundantConnection(int[][] edges) {
         int length = edges.length;
         int index=0;
-        Map<Integer, Integer> idMap = new HashMap<>();
-        UnionFind unionFind = new UnionFind(length);
+        UnionFind unionFind = new UnionFind(length+1);
         for (int i = 0; i < length; i++) {
             int x = edges[i][0];
             int y = edges[i][1];
 
-            if (!idMap.containsKey(x)){
-                idMap.put(x, index++);
-            }
-            if (!idMap.containsKey(y)){
-                idMap.put(y, index++);
-            }
-
-            boolean merge = unionFind.merge(idMap.get(x), idMap.get(y));
+            boolean merge = unionFind.merge(x, y);
             if (!merge){
                 return edges[i];
             }
         }
         return new int[]{0,0};
+    }
+
+
+    public int[] findRedundantConnection2(int[][] edges) {
+        int nodesCount = edges.length;
+        int[] parent = new int[nodesCount + 1];
+        for (int i = 1; i <= nodesCount; i++) {
+            parent[i] = i;
+        }
+        for (int i = 0; i < nodesCount; i++) {
+            int[] edge = edges[i];
+            int node1 = edge[0], node2 = edge[1];
+            if (find(parent, node1) != find(parent, node2)) {
+                union(parent, node1, node2);
+            } else {
+                return edge;
+            }
+        }
+        return new int[0];
+    }
+
+
+    public void union(int[] parent, int index1, int index2) {
+        parent[find(parent, index1)] = find(parent, index2);
+    }
+
+    public int find(int[] parent, int index) {
+        if (parent[index] != index) {
+            parent[index] = find(parent, parent[index]);
+        }
+        return parent[index];
     }
 
     //并查集
