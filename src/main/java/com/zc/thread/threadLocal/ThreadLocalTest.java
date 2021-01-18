@@ -1,4 +1,4 @@
-package com.zc.threadLocal;
+package com.zc.thread.threadLocal;
 
 /**
  * Description: https://www.cnblogs.com/hama1993/p/10382523.html
