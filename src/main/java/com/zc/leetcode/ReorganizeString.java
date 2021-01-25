@@ -1,6 +1,9 @@
 package com.zc.leetcode;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * 767. 重构字符串
@@ -71,5 +74,6 @@ public class ReorganizeString {
     public static void main(String[] args) {
         ReorganizeString reorganizeString = new ReorganizeString();
         reorganizeString.reorganizeString("aaabbc");
+        System.out.println("run---"+Runtime.getRuntime().availableProcessors());
     }
 }
