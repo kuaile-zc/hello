@@ -1,5 +1,7 @@
 package com.zc.leetcode;
 
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
+
 /**
  * 978. 最长湍流子数组
  * 当 A 的子数组 A[i], A[i+1], ..., A[j] 满足下列条件时，我们称其为湍流子数组：
@@ -67,6 +69,28 @@ public class LongestRiver {
 
         return maxValue;
 
+    }
+
+    //空间压缩
+    public int maxTurbulenceSize2(int[] arr) {
+        int length = arr.length;
+        int up = 1, down = 1, ret =1;
+        for(int i=1; i<length; i++){
+            if(arr[i]==arr[i-1]){
+                up = 1;
+                down = 1;
+                continue;
+            }else if(arr[i]>arr[i-1]){
+                up = down + 1;
+                down = 1;
+                ret = Math.max(ret, up);
+            }else{
+                down = up + 1;
+                up =1;
+                ret = Math.max(ret, down);
+            }
+        }
+        return ret;
     }
 
     public static void main(String[] args) {
