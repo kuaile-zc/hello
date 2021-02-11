@@ -47,7 +47,7 @@ public class SemaphoreConnectPool {
                 connectFlag[i] = true;
                 //可用连接数减1
                 available--;
-                System.out.println("["+Thread.currentThread().getName()+"]以获取连接      剩余连接数：" + available);
+                System.out.println("["+Thread.currentThread().getName()+"]以获取连接    剩余连接数：" + available);
                 //返回连接引用
                 return connects[i];
             }
@@ -87,23 +87,6 @@ public class SemaphoreConnectPool {
 
     }
 
-
-    public static class TestThread extends Thread {
-
-        private SemaphoreConnectPool pool = new SemaphoreConnectPool(2);
-
-        @Override
-        public void run() {
-            try {
-                Connect connect = pool.openConnect();
-                Thread.sleep(5000);  //休息一下
-                pool.release(connect);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 
 
     public static void main(String[] args) {
