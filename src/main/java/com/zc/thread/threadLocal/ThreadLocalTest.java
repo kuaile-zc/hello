@@ -11,20 +11,24 @@ public class ThreadLocalTest {
     public static ThreadLocal threadLocal1 = new ThreadLocal<>();
 
     public static void main(String[] args) throws InterruptedException {
-        threadLocal1.set(1);
-        printMessage(Thread.currentThread().getName(), "main", threadLocal1.get());
-        method();
+//        threadLocal1.set(1);
+//        printMessage(Thread.currentThread().getName(), "main", threadLocal1.get());
+//        method();
+//
+//        new Thread(() -> {
+//            threadLocal1.set(2);
+//            method();
+//        }
+//
+//        ).start();
+//
+//        Thread.sleep(1000L);
+//
+//        method();
 
-        new Thread(() -> {
-            threadLocal1.set(2);
-            method();
-        }
-
-        ).start();
-
-        Thread.sleep(1000L);
-
-        method();
+        threadLocal1.set("aaaaa");
+        Object o = threadLocal1.get();
+        System.out.println(o);
 
     }
 
