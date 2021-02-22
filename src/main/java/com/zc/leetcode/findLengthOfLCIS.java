@@ -1,4 +1,4 @@
-package com.zc.leet;
+package com.zc.leetcode;
 
 import java.util.Arrays;
 

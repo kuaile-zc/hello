@@ -1,4 +1,4 @@
-package com.zc.leet;
+package com.zc.leetcode;
 
 /**
  * 1232. 缀点成线
