@@ -1,4 +1,4 @@
-package com.zc.leet;
+package com.zc.leetcode;
 
 /**
  * 803. 打砖块
