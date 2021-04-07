@@ -1,6 +1,8 @@
 package com.zc.leetcode;
 
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 /**
  * @author CoreyChen Zhang
@@ -55,4 +57,5 @@ public class RemoveDuplicatesFromSortedArray2 {
         RemoveDuplicatesFromSortedArray2 removeDuplicatesFromSortedArray2 = new RemoveDuplicatesFromSortedArray2();
         removeDuplicatesFromSortedArray2.removeDuplicates2(new int[]{1, 1, 1});
     }
+
 }
