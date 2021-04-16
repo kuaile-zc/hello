@@ -80,7 +80,7 @@ public class ScrambleString {
             return true;
         }
 
-        if (checkIfSimilar(childStr1, childStr2)){
+        if (!checkIfSimilar(childStr1, childStr2)){
             memo[l1][l2][length] = -1;
             return false;
         }
@@ -94,7 +94,7 @@ public class ScrambleString {
             }
 
             //交换
-            if (dfs(l1, length-i, i) && dfs(l1+i, l2, length-i)){
+            if (dfs(l1, l2+ length-i, i) && dfs(l1+i, l2, length-i)){
                 memo[l1][l2][length] = 1;
                 return true;
             }
@@ -122,5 +122,10 @@ public class ScrambleString {
             ret[str.charAt(i) - 'a']++;
         }
         return ret;
+    }
+
+    public static void main(String[] args) {
+        ScrambleString scrambleString = new ScrambleString();
+        scrambleString.isScramble("abc", "acb");
     }
 }
