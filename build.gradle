@@ -52,6 +52,8 @@ dependencies {
 
     compile group: 'com.codahale.metrics', name: 'metrics-jvm', version: '3.0.2'
 
+    //netty
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.20.Final'
 
     //Juest company need
 //    compile ('expedia:com.expedia.e3.shopsvc.shared.thirdparty.lcs:3.0.0'){
