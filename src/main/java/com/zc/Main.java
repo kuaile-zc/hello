@@ -25,6 +25,8 @@ public class Main{
 //
 //        System.out.println(getIslandNumber(data));
 
+        System.out.println("la相关");
+
         Instant instant = Instant.now();
         System.out.println(instant);
         System.out.println(Date.from(instant));
