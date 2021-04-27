@@ -1,4 +1,4 @@
-package com.zc.nacos;
+package com.zc.nacos.sample;
 
 /**
  * @author CoreyChen Zhang
