@@ -1,4 +1,4 @@
-package com.zc.nacos;
+package com.zc.nacos.sample;
 
 /**
  * 伪代码方案 解密方案
@@ -25,3 +25,4 @@ public class NacosConfigService {
         return "";
     }
 }
+
