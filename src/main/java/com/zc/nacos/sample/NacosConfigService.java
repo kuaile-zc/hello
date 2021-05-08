@@ -1,5 +1,7 @@
 package com.zc.nacos.sample;
 
+import com.zc.nacos.DecodeService;
+
 /**
  * 伪代码方案 解密方案
  * @author CoreyChen Zhang
