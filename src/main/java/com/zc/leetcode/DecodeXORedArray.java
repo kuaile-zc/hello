@@ -1,5 +1,7 @@
 package com.zc.leetcode;
 
+import java.util.Optional;
+
 /**
  * 1720. 解码异或后的数组
  * @author CoreyChen Zhang
@@ -16,5 +18,11 @@ public class DecodeXORedArray {
             result[i] = encoded[i-1] ^ result[i-1];
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Optional<String> s = Optional.of(String.valueOf(null));
+        System.out.println("");
+
     }
 }
