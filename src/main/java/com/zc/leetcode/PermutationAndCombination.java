@@ -15,7 +15,7 @@ public class PermutationAndCombination {
 
     public static void main(String[] args) {
 
-        printPermutation("abcd");
+        printPermutation("abc");
     }
     /**
      * 输出s的全排列
@@ -110,7 +110,6 @@ public class PermutationAndCombination {
      */
     private static void exchChars(int j, int k) {
         if (j == k){
-
             return;
         }
         char temp = charArray[j];
