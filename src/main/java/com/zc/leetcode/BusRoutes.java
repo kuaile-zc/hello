@@ -110,8 +110,57 @@ public class BusRoutes {
         return result;
     }
 
+
+
+    public int numBusesToDestination2(int[][] routes, int source, int target) {
+        if (source == target) {
+            return 0;
+        }
+
+        int n = routes.length;
+        boolean[][] edge = new boolean[n][n];
+        Map<Integer, List<Integer>> rec = new HashMap<Integer, List<Integer>>();
+        for (int i = 0; i < n; i++) {
+            for (int site : routes[i]) {
+                List<Integer> list = rec.getOrDefault(site, new ArrayList<Integer>());
+                for (int j : list) {
+                    edge[i][j] = edge[j][i] = true;
+                }
+                list.add(i);
+                rec.put(site, list);
+            }
+        }
+
+        int[] dis = new int[n];
+        Arrays.fill(dis, -1);
+        Queue<Integer> que = new LinkedList<Integer>();
+        for (int bus : rec.getOrDefault(source, new ArrayList<Integer>())) {
+            dis[bus] = 1;
+            que.offer(bus);
+        }
+        while (!que.isEmpty()) {
+            int x = que.poll();
+            for (int y = 0; y < n; y++) {
+                if (edge[x][y] && dis[y] == -1) {
+                    dis[y] = dis[x] + 1;
+                    que.offer(y);
+                }
+            }
+        }
+
+        int ret = Integer.MAX_VALUE;
+        for (int bus : rec.getOrDefault(target, new ArrayList<Integer>())) {
+            if (dis[bus] != -1) {
+                ret = Math.min(ret, dis[bus]);
+            }
+        }
+        return ret == Integer.MAX_VALUE ? -1 : ret;
+    }
+
+
     public static void main(String[] args) {
         BusRoutes busRoutes = new BusRoutes();
-        busRoutes.numBusesToDestination(new int[][]{{7,12}, {4,5,15}, {6}, {15,19}, {9,12,13}}, 1, 6);
+//        busRoutes.numBusesToDestination2(new int[][]{{7,12}, {4,5,15}, {6}, {15,19}, {9,12,13}}, 1, 6);
+        busRoutes.numBusesToDestination2(new int[][]{{1,3,7}, {7,8,12}}, 1, 12);
     }
 }
