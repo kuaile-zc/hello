@@ -71,6 +71,21 @@ public class HIndex {
         return 0;
     }
 
+    public int hIndex2(int[] citations) {
+        int n = citations.length;
+        int left = 0, right = n - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (citations[mid] >= n - mid) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return n - left;
+    }
+
+
     public static void main(String[] args) {
         HIndex hIndex= new HIndex();
         hIndex.hIndex(new int[]{0,0});
