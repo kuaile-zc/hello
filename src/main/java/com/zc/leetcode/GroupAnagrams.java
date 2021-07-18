@@ -55,8 +55,33 @@ public class GroupAnagrams {
         return ret;
     }
 
+
+    public List<List<String>> groupAnagrams2(String[] strs) {
+        int length = strs.length;
+        List<List<String>> result = new ArrayList<>();
+        if (length == 0){
+            return result;
+        }
+
+        Map<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < length; i++) {
+            String str = strs[i];
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String key = new String(charArray);
+            List<String> list = map.getOrDefault(key, new ArrayList<String>());
+            list.add(str);
+            map.put(key, list);
+        }
+
+        for (Map.Entry<String, List<String>> entry : map.entrySet()){
+            result.add(entry.getValue());
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         GroupAnagrams groupAnagrams = new GroupAnagrams();
-        groupAnagrams.groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat","",""});
+        groupAnagrams.groupAnagrams2(new String[]{"eat","tea","tan","ate","nat","bat","",""});
     }
 }
