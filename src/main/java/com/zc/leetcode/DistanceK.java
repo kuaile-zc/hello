@@ -1,8 +1,7 @@
 package com.zc.leetcode;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 863. 二叉树中所有距离为 K 的结点
@@ -44,16 +43,69 @@ import java.util.Map;
 public class DistanceK {
 
     Map<TreeNode, TreeNode> map = new HashMap<>();
+    int k;
+    List<Integer> result = new ArrayList<>();
 
     public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-//        Map<TreeNode, TreeNode> map = new HashMap<>();
-
+        this.k = k;
+        AddRootDfs(root);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(target);
+        dfs(target, 0, null);
+        return result;
     }
 
-    private void dfs(TreeNode treeNode) {
+    private void AddRootDfs(TreeNode treeNode) {
         if (treeNode == null) {
             return;
         }
-
+        if (treeNode.left != null) {
+            map.put(treeNode.left, treeNode);
+        }
+        if (treeNode.right != null) {
+            map.put(treeNode.right, treeNode);
+        }
+        AddRootDfs(treeNode.left);
+        AddRootDfs(treeNode.right);
     }
+
+    private void dfs(TreeNode treeNode, int curIndex, TreeNode pre) {
+        if (curIndex == k) {
+            result.add(treeNode.val);
+            return;
+        }
+        if (map.get(treeNode) != null && map.get(treeNode) != pre ){
+            dfs(map.get(treeNode), curIndex+1, treeNode);
+        }
+        if (treeNode.left != null && treeNode.left != pre ){
+            dfs(treeNode.left, curIndex+1, treeNode);
+        }
+        if (treeNode.right != null && treeNode.right != pre ){
+            dfs(treeNode.right, curIndex+1, treeNode);
+        }
+    }
+
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(3);
+        TreeNode target = new TreeNode(5);
+        TreeNode rootRight = new TreeNode(1);
+
+        TreeNode targetRight = new TreeNode(2);
+        targetRight.left = new TreeNode(7);
+        targetRight.right = new TreeNode(4);
+
+        target.left = new TreeNode(6);
+        target.right = targetRight;
+
+        rootRight.left = new TreeNode(0);
+        rootRight.right = new TreeNode(8);
+
+        root.left = target;
+        root.right = rootRight;
+
+        DistanceK distanceK = new DistanceK();
+        distanceK.distanceK(root, target, 2);
+    }
+
 }
