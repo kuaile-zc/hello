@@ -52,6 +52,18 @@ public class SearchTargetNumb {
         return targetLeftIndex - left;
     }
 
+    public int search2(int[] nums, int target) {
+        int length = nums.length, result = 0;
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == target){
+                result++;
+            }else if (nums[i] > target){
+                break;
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         SearchTargetNumb searchTargetNumb = new SearchTargetNumb();
         searchTargetNumb.search(new int[]{5,7,7,7,8,8,10},7);
