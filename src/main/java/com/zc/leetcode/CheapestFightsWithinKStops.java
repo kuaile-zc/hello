@@ -1,5 +1,7 @@
 package com.zc.leetcode;
 
+import java.util.Arrays;
+
 /**
  * 787. K 站中转内最便宜的航班
  * 有 n 个城市通过一些航班连接。给你一个数组 flights ，其中 flights[i] = [fromi, toi, pricei] ，表示该航班都从城市 fromi 开始，以价格 pricei 抵达 toi。
@@ -55,25 +57,25 @@ package com.zc.leetcode;
 public class CheapestFightsWithinKStops {
 
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
-        if ( k == 0) {
-            return -1;
+        final int INF = 10000 * 101 + 1;
+        int[][] dp = new int[k+2][n];
+        //init
+        for (int i = 0; i <= k + 1; i++) {
+            Arrays.fill(dp[i], INF);
         }
-        int[][] paths = new int[n][n];
-        for (int[] flight : flights) {
-            paths[flight[0]][flight[1]] = flight[2];
-        }
-        int[][] dp = new int[k+1][n];
-        for (int i = 1; i <= k; i++) {
-            int min = Integer.MAX_VALUE;
-            for (int j = 0; j < n; j++) {
-                for (int l = 0; l < n; l++) {
-                    if (paths[l][j] != 0) {
-                        min = Math.min(min, paths[l][j]);
-                    }
-                }
+
+        dp[0][src] = 0;
+        for (int i = 1; i <= k+1; i++) {
+            for (int[] flight : flights) {
+                int form = flight[0], to = flight[1], price = flight[2];
+                dp[i][to] = Math.min(dp[i][to], dp[i-1][form] + price);
             }
-            dp[i][j] = (min == Integer.MAX_VALUE ? 0 : min);
         }
-        return dp[k][dst];
+
+        int result = INF;
+        for (int i = 1; i <= k + 1; i++) {
+            result = Math.min(result, dp[i][dst]);
+        }
+        return result == INF ? -1 : result;
     }
 }
