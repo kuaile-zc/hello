@@ -94,12 +94,23 @@ public class FlattenLinkedList {
         while (node != null) {
             if (node.child != null) {
                 Node childNode = node.child;
-                while (childNode.next != null) {
-                    childNode = childNode.next;
+                Node nextNode = node.next;
+                Node childEndNode = childNode;
+                while (childEndNode.next != null) {
+                    childEndNode = childEndNode.next;
                 }
+                node.child = null;
+                node.next = childNode;
+                childNode.prev = node;
+                childEndNode.next = nextNode;
+                if (nextNode != null) {
+                    nextNode.prev = childEndNode;
+                }
+            }else {
+                node = node.next;
             }
         }
-        return null;
+        return head;
     }
 
 
