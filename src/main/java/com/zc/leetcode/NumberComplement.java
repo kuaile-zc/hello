@@ -48,6 +48,8 @@ public class NumberComplement {
     }
 
     public static void main(String[] args) {
+        System.out.println(Character.toString((char) 2));
+        System.out.println(Character.toString((char) 1));
         NumberComplement numberComplement = new NumberComplement();
         numberComplement.findComplement(5);
     }
