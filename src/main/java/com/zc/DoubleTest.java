@@ -21,6 +21,10 @@ public class DoubleTest {
 
         Map<String, String> map = new HashMap<>();
         map.put("1","1");
+        String clusterName = "csmtest-1992236456";
+        final int beginIndex = clusterName.lastIndexOf("-") + 1;
+        String clusterId = clusterName.substring(beginIndex >= clusterName.length() ? 0 : beginIndex);
+        System.out.println(clusterId);
 
     }
 
