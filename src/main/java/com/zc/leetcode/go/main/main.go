@@ -1,6 +1,8 @@
 package main
 
-import "sort"
+import (
+	"sort"
+)
 
 type TreeNode struct {
 	Val   int
@@ -84,4 +86,29 @@ func isUnivalTree(root *TreeNode) bool {
 		return false
 	}
 	return isUnivalTree(root.Right) && isUnivalTree(root.Left)
+}
+
+// https://leetcode.cn/problems/unique-substrings-in-wraparound-string/
+func findSubstringInWraproundString(p string) (ans int) {
+	var dp [26]int
+	k := 0
+	for i := 0; i < len(p); i++ {
+		if i > 0 && (p[i]-p[i-1]+26)%26 == 1 {
+			k++
+		} else {
+			k = 1
+		}
+		dp[p[i]-'a'] = max(dp[p[i]-'a'], k)
+	}
+	for _, v := range dp {
+		ans += v
+	}
+	return
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
