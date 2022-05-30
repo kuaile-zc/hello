@@ -12,7 +12,9 @@ type TreeNode struct {
 
 func main() {
 	//minMoves2([]int{1,2,3,100,5,9})
-	println(canIWin(10, 0))
+	//println(canIWin(10, 0))
+	//findClosest([]string{"I","am","a","student","from","a","university","in","a","city"}, "a","student" )
+	removeOuterParentheses("(()())(())")
 }
 
 //
@@ -111,4 +113,64 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func findClosest(words []string, word1 string, word2 string) int {
+	index := [2]int{-1, -1}
+	result := len(words)
+	for idx, str := range words {
+		if str != word1 && str != word2 {
+			continue
+		} else if str == word1 {
+			index[0] = idx
+		} else {
+			index[1] = idx
+		}
+
+		if index[0] != -1 && index[1] != -1 {
+			result = min(result, abs(index[0], index[1]))
+		}
+	}
+	return result
+}
+
+func min(a int, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+// https://leetcode.cn/problems/remove-outermost-parentheses/
+func removeOuterParentheses(s string) string {
+	var result []rune
+	curBracketNum := 0
+	for _, c := range s {
+		if c == ')' {
+			curBracketNum--
+		}
+		if curBracketNum > 0 {
+			result = append(result, c)
+		}
+		if c == '(' {
+			curBracketNum++
+		}
+	}
+	return string(result)
+}
+
+// https://leetcode.cn/problems/sum-of-root-to-leaf-binary-numbers/
+func sumRootToLeaf(root *TreeNode) int {
+	return dfs2(root, 0)
+}
+
+func dfs2(root *TreeNode, value int) int {
+	if root == nil {
+		return 0
+	}
+	value = value<<1 | root.Val
+	if root.Right == nil && root.Left == nil {
+		return value
+	}
+	return dfs2(root.Left, value) + dfs2(root.Right, value)
 }
